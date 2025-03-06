@@ -53,6 +53,20 @@
       <v-dialog v-model="errDialog" width="auto">
         <ErrorDialog :errType="errType" :errMsg="errMsg" @errorClose="errDialog = false" />
       </v-dialog>
+
+      <v-snackbar v-model="snackbar">
+        {{ snacktext }}
+
+        <template v-slot:actions>
+            <v-btn
+                color="success"
+                variant="text"
+                @click="snackbar = false"
+            >
+                Close
+            </v-btn>
+        </template>
+        </v-snackbar>
     </div>
 </template>
 
@@ -64,6 +78,9 @@ const emit      = defineEmits(['close'])
 const title     = ref()
 const author    = ref()
 const text      = ref()
+
+const snackbar  = ref(false)
+const snacktext = ref()
 
 const errType   = ref()
 const errMsg    = ref()
@@ -78,9 +95,16 @@ const submit = async () => {
         text: text.value
     }
     const { error } = await supabase.from('posts').insert(obj)
-    if (error) throwErr('Post Creation', error.message)
-    else {
+    if (error) {
         emit('close')
+        throwErr('Post Creation', error.message)
+    } else {
+        snackbar.value = true
+        snacktext.value = 'Post created successfully'
+        emit('close')
+        title.value = null
+        author.value = null
+        text.value = null
     }
 }
 

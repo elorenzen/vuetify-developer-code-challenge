@@ -3,12 +3,12 @@
     class="ma-4"
     :title="post.title"
   >
+    <v-divider />
     <v-card-text class="text-h6 py-2">
       "{{ post.text }}"
     </v-card-text>
     <template #append>
       <v-btn
-        color="info"
         icon="mdi-pencil"
         variant="text"
         slim
@@ -20,7 +20,6 @@
         slim
       />
     </template>
-    <v-divider />
     <v-card-actions>
       <v-list-item class="w-100">
         <template #append>

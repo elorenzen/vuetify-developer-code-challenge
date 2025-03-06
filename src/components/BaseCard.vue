@@ -16,6 +16,7 @@
       <v-btn
         color="error"
         icon="mdi-trash-can"
+        @click="deleteDialog = true"
         variant="text"
         slim
       />
@@ -31,12 +32,63 @@
       </v-list-item>
     </v-card-actions>
   </v-card>
+  <v-dialog
+    v-model="deleteDialog"
+    max-width="400"
+    color="error"
+  >
+    <v-card>
+        <v-card-title>Delete Post</v-card-title>
+        <v-card-text>
+            Are you sure you want to delete this post? This action cannot be undone.
+        </v-card-text>
+        <v-card-actions>
+            <v-btn block color="error" variant="flat" @click="deletePostConfirm">Confirm</v-btn>
+        </v-card-actions>
+    </v-card>
+    <v-dialog v-model="errDialog" width="auto">
+      <ErrorDialog :errType="errType" :errMsg="errMsg" @errorClose="errDialog = false" />
+    </v-dialog>
+
+    <v-snackbar v-model="snackbar">
+        {{ snacktext }}
+
+        <template v-slot:actions>
+            <v-btn
+                color="success"
+                variant="text"
+                @click="snackbar = false"
+            >
+                Close
+            </v-btn>
+        </template>
+    </v-snackbar>
+  </v-dialog>
 </template>
 
 <script setup lang="ts">
-  import { computed } from 'vue'
-  const props = defineProps(['post'])
-  const post  = computed(() => props.post)
+  import { computed, ref } from 'vue'
+  import supabase from '../plugins/supabase'
+  const props        = defineProps(['post'])
+  const post         = computed(() => props.post)
+  const deleteDialog = ref(false)
+  const errDialog    = ref(false)
+  const errType      = ref()
+  const errMsg       = ref()
+  const snackbar     = ref(false)
+  const snacktext    = ref()
+
+  const deletePostConfirm = async () => {
+    const { error } = await supabase.from('posts').delete().eq('id', post.value.id) 
+    if (error) {
+        deleteDialog.value = false
+        throwErr('Post Deletion', error.message)
+    } else {
+        snackbar.value = true
+        snacktext.value = 'Post deleted successfully'
+        deleteDialog.value = false
+    }
+  }
 
   const timeSince = (date:any) => {
     const dateTimestamp = new Date(date).getTime()
@@ -63,6 +115,12 @@
         return Math.floor(interval) + " minutes ago";
     }
     return Math.floor(seconds) + " seconds ago";
+  }
+
+  const throwErr = (title: any, msg: any) => {
+    errType.value = title
+    errMsg.value = msg
+    errDialog.value = true
   }
 </script>
 

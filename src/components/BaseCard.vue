@@ -10,6 +10,7 @@
     <template #append>
       <v-btn
         icon="mdi-pencil"
+        @click="editDialog = true"
         variant="text"
         slim
       />
@@ -32,6 +33,14 @@
       </v-list-item>
     </v-card-actions>
   </v-card>
+
+  <v-dialog
+    v-model="editDialog"
+    width="auto"
+  >
+    <EditDialog :post="post" @close="editDialog = false" />
+  </v-dialog>
+
   <v-dialog
     v-model="deleteDialog"
     max-width="400"
@@ -71,6 +80,7 @@
   import supabase from '../plugins/supabase'
   const props        = defineProps(['post'])
   const post         = computed(() => props.post)
+  const editDialog   = ref(false)
   const deleteDialog = ref(false)
   const errDialog    = ref(false)
   const errType      = ref()

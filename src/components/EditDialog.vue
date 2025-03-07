@@ -3,7 +3,7 @@
       <v-card
         width="400"
       >
-        <v-toolbar>
+        <v-toolbar color="primary">
         <v-toolbar-title>Edit Post</v-toolbar-title>
         <v-spacer />
 
@@ -44,7 +44,7 @@
                     <v-btn
                         class="ms-auto"
                         block
-                        color="primary"
+                        color="tertiary"
                         variant="flat"
                         text="Submit Edit(s)"
                         :disabled="

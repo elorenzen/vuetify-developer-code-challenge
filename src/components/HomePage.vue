@@ -21,12 +21,12 @@
       <v-row>
         <v-col class="d-flex justify-end">
           <v-btn
-            color="primary"
+            color="tertiary"
             slim
             icon="mdi-plus"
             @click="addDialog = true"
           >
-          <v-icon>mdi-plus</v-icon>
+            <v-icon>mdi-plus</v-icon>
             <v-tooltip
               activator="parent"
               location="top"
@@ -35,12 +35,14 @@
             </v-tooltip>
           </v-btn>
         </v-col>
-        <v-divider />
-        <BaseCard
-          v-for="post in posts"
-          :key="post.id"
-          :post="post"
-        />
+        <v-divider color="primary" />
+        <v-col>
+            <BaseCard
+                v-for="post in posts"
+                :key="post.id"
+                :post="post"
+            />
+        </v-col>
       </v-row>
       <v-dialog
         v-model="addDialog"

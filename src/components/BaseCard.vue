@@ -2,11 +2,12 @@
   <v-row>
     <v-col cols="12">
       <v-card
-      
-        class="my-2 pa-2"
+        border="accent md opacity-100"
+        color="primary"
+        class="text-accent"
         :title="post.title"
-  >
-    <v-divider />
+      >
+    <v-divider color="accent" />
     <v-card-text class="text-h6 py-2">
       "{{ post.text }}"
     </v-card-text>

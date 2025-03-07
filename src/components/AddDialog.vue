@@ -3,7 +3,7 @@
       <v-card
         width="400"
       >
-        <v-toolbar>
+        <v-toolbar color="primary">
         <v-toolbar-title>New Post</v-toolbar-title>
         <v-spacer />
 
@@ -17,6 +17,7 @@
         <v-row class="pa-4">
             <v-col cols="12" class="mb-0 pb-0">
                 <v-text-field
+                    color="secondary"
                     v-model="title"
                     label="Title"
                     variant="outlined"
@@ -44,7 +45,7 @@
                     <v-btn
                         class="ms-auto"
                         block
-                        color="primary"
+                        color="tertiary"
                         variant="flat"
                         text="Submit"
                         :disabled="!title || !author || !text"

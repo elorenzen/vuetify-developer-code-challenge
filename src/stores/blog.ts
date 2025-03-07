@@ -13,4 +13,4 @@ export const useAppStore = defineStore('blog', {
       this.posts = data
     },
   },
-})
+}, { persist: true })

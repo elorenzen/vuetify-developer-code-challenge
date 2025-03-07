@@ -14,22 +14,22 @@
             @click="close"
         />
         </v-toolbar>
-        <v-row class="pa-2">
-            <v-col cols="12">
+        <v-row class="pa-4">
+            <v-col cols="12" class="mb-0 pb-0">
                 <v-text-field
                     v-model="title"
                     label="Title"
                     variant="outlined"
                 />
             </v-col>
-            <v-col cols="12">
+            <v-col cols="12" class="my-0 py-0">
                 <v-text-field
                     v-model="author"
                     label="Author"
                     variant="outlined"
                 />
             </v-col>
-            <v-col cols="12">
+            <v-col cols="12" class="my-0 py-0">
                 <v-textarea
                     v-model="text"
                     label="Post Content"
@@ -39,15 +39,19 @@
         </v-row>
 
         <template v-slot:actions>
-          <v-btn
-            class="ms-auto"
-            block
-            color="primary"
-            variant="flat"
-            text="Submit"
-            :disabled="!title || !author || !text"
-            @click="submit"
-          />
+            <v-row class="pa-4">
+                <v-col cols="12">
+                    <v-btn
+                        class="ms-auto"
+                        block
+                        color="primary"
+                        variant="flat"
+                        text="Submit"
+                        :disabled="!title || !author || !text"
+                        @click="submit"
+                    />
+                </v-col>
+            </v-row>
         </template>
       </v-card>
       <v-dialog v-model="errDialog" width="auto">

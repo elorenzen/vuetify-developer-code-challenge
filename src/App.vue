@@ -13,5 +13,18 @@
   onMounted(async () => {
     const { data } = await supabase.from('posts').select('*')
     if (data) await store.setPosts(data)
+
+    supabase
+      .channel('posts')
+      .on(
+        'postgres_changes',
+        {
+          event: '*', schema: 'public', table: 'posts'
+        },
+        async (payload:any) => {
+          const { data: eventData } = await supabase.from('posts').select()
+          await store.setPosts(eventData)
+        })
+      .subscribe()
   })
 </script>

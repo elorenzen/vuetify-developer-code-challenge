@@ -22,10 +22,18 @@
         <v-col class="d-flex justify-end">
           <v-btn
             color="primary"
+            slim
             icon="mdi-plus"
             @click="addDialog = true"
-            slim
-          />
+          >
+          <v-icon>mdi-plus</v-icon>
+            <v-tooltip
+              activator="parent"
+              location="top"
+            >
+              Add Post
+            </v-tooltip>
+          </v-btn>
         </v-col>
         <v-divider />
         <BaseCard

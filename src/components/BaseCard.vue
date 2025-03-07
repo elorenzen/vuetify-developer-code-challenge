@@ -1,7 +1,10 @@
 <template>
-  <v-card
-    class="ma-4"
-    :title="post.title"
+  <v-row>
+    <v-col cols="12">
+      <v-card
+      
+        class="my-2 pa-2"
+        :title="post.title"
   >
     <v-divider />
     <v-card-text class="text-h6 py-2">
@@ -13,21 +16,45 @@
         @click="editDialog = true"
         variant="text"
         slim
-      />
+      >
+        <v-icon>mdi-pencil</v-icon>
+        <v-tooltip
+            activator="parent"
+            location="top"
+        >
+            Edit Post
+        </v-tooltip>
+      </v-btn>
       <v-btn
         color="error"
         icon="mdi-trash-can"
         @click="deleteDialog = true"
         variant="text"
         slim
-      />
+      >
+        <v-icon>mdi-trash-can</v-icon>
+        <v-tooltip
+            activator="parent"
+            location="top"
+        >
+            Delete Post
+        </v-tooltip>
+      </v-btn>
     </template>
     <v-card-actions>
       <v-list-item class="w-100">
         <template #append>
           <div class="justify-self-end">
             <v-list-item-title>{{ post.author }}</v-list-item-title>
-            <v-list-item-subtitle>{{ timeSince(post.created_at) }}</v-list-item-subtitle>
+            <v-list-item-subtitle>
+                {{ timeSince(post.created_at) }}
+                <v-tooltip
+                    activator="parent"
+                    location="bottom"
+                >
+                {{ new Date(post.created_at).toLocaleString('en-US') }}
+                </v-tooltip>
+            </v-list-item-subtitle>
           </div>
         </template>
       </v-list-item>
@@ -73,6 +100,8 @@
         </template>
     </v-snackbar>
   </v-dialog>
+  </v-col>
+</v-row>
 </template>
 
 <script setup lang="ts">

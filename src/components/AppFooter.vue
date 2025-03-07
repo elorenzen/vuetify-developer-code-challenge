@@ -16,7 +16,7 @@
 
   const model = ref(false)
   watch(model, (newVal) => {
-    theme.global.name.value = newVal ? 'myCustomDarkTheme' : 'myCustomLightTheme'
+    theme.global.name.value = newVal ? 'myCustomLightTheme' : 'myCustomDarkTheme'
   })
 </script>
 

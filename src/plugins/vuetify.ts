@@ -68,7 +68,7 @@ const myCustomDarkTheme = {
 const myCustomLightTheme = {
   dark: false,
   colors: {
-    "primary": "#545D82",
+    "primary": "#fffffe",
     "surfaceTint": "#545D82",
     "onPrimary": "#FFFFFF",
     "primaryContainer": "#B8C1EC",
@@ -85,7 +85,7 @@ const myCustomLightTheme = {
     "onError": "#FFFFFF",
     "errorContainer": "#FFDAD6",
     "onErrorContainer": "#93000A",
-    "background": "#FBF8FC",
+    "background": "#b8c1ec",
     "onBackground": "#1B1B1E",
     "surface": "#FCF8FB",
     "onSurface": "#1B1B1E",
